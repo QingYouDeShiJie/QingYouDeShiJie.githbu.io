@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color:black;
+        }
+        .box{
+            width:1000px;
+            height:500px;
+            border: 1px solid #000;
+            margin:50px auto;
+            perspective:5000000px;
+        }
+        .unit{
+            width:1000px;
+            height:500px;
+            perspective:5000000px;
+            transform-style:preserve-3d;
+
+        }
+        .unit div{
+            width:50px;
+            height:100px;
+            line-height:100px;
+            text-align: center;
+            font-size: 20px;
+            position: absolute;
+            top:150px;
+            left:400px;
+            transition:all 2s ease 0s;
+        }
+        .unit div img{
+            width:100px;
+            height:auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="unit">
+
+        </div>
+    </div>
+    <input type="button" name="" value="球" class="btn1">
+    <input type="button" name="" value="螺旋" class="btn2">
+    <input type="button" name="" value="矩阵" class="btn3">
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+    //创建250个div;
+    function createBox(){
+        var arrColor = ["#DDDDDD","#CCCCCC","#BBBBBB","#AAAAAA","#999999","#888888","#777777","#666666","#555555","#444444","#333333","#222222","#111111","#000000","#FF0000","#EE0000","#DD0000","#CC0000","#BB0000","#AA0000","#990000","#880000","#770000","#660000","#550000","#440000","#330000","#220000","#110000","#FFFFFF","#FFFFCC","#FFFF99","#FFFF66","#FFFF33","#FFFF00","#CCFFFF","#CCFFCC","#CCFF99","#CCFF66","#CCFF33","#CCFF00","#99FFFF","#FFCCCC","#FFCC99","#FFCC66","#FFCC33","#FFCC00","#CCCCFF","#CCCCCC","#CCCC99","#CCCC66","#CCCC33","#CCCC00","#99CCFF","#99CCCC","#99CC99","#99CC66","#99CC33","#99CC00","#66CCFF","#66CCCC","#66CC99","#66CC66","#66CC33","#66CC00","#33CCFF","#33CCCC","#33CC99","#33CC66","#33CC33","#33CC00","#00CCFF","#00CCCC","#00CC99","#00CC66","#00CC33","#00CC00","#FF99FF","#FF99CC","#FF9999","#FF9966","#FF9933","#FF9900","#CC99FF","#FF66CC","#FF6699","#FF6666","#FF6633","#FF6600","#CC66FF","#CC66CC","#CC6699","#CC6666","#CC6633","#CC6600","#9966FF","#9966CC","#996699","#996666","#996633","#996600","#6666FF","#6666CC","#666699","#666666","#666633","#666600","#3366FF","#3366CC","#336699","#336666","#336633","#336600","#0066FF","#0066CC","#006699","#006666","#006633","#006600","#FF33FF","#FF33CC","#FF3399","#FF3366","#FF3333","#FF3300","#CC33FF","#FF00CC","#FF0099","#FF0066","#FF0033","#FF0000","#CC00FF","#CC00CC","#CC0099","#CC0066","#CC0033","#CC0000","#9900FF","#9900CC","#990099","#990066","#990033","#990000","#6600FF","#6600CC","#660099","#660066","#660033","#660000","#3300FF","#3300CC","#330099","#330066","#330033","#330000","#0000FF","#0000CC","#000099","#000066","#000033","#000000","#00FF00","#00EE00","#00DD00","#00CC00","#00BB00","#00AA00","#990099"];
+
+        for (var i = 0; i < 250; i++) {
+                arrIndex = parseInt(Math.random() * 168);
+            $("<div><img src='images/Nature/pic ("+(i+1)+").jpg'></div>").css("background-color",arrColor[arrIndex]).appendTo(".unit");
+        };
+    };
+    //创建球
+    function setBall(){
+
+        //计算纬度；-90、-80、 -60、-40、-20、0、20、40、60、80、90
+        //
+        for( var i = 0 ; i < 250 ; i++ ){
+            // 该图片属于哪个纬度
+            var censhu = parseInt(i/(250/11))
+            var weiduArr = [90,80,60,40,20,0,-20,-40,-60,-80,-90];
+            // 图片的纬度；
+            var weidu = weiduArr[censhu];
+            // 计算呢每张图片旋转的角度；
+            var jiaodu = i%23 * (360/23);
+
+            $(".unit div").eq(i).css("transform","rotateY("+jiaodu+"deg) rotateX("+weidu+"deg) translateZ(500px)");
+        }
+    };
+    function setScrew(){
+        for( var i = 0 ; i < 250 ; i++){
+
+            $(".unit div").eq(i).css("transform","rotateY("+i*16+"deg) translateY("+(i*10)+"px) translateZ(500px)");
+        }
+    }
+    // 设置矩阵
+    function setrectangle(){
+        for( var i = 0 ; i < 250 ; i++){
+            // 面
+            var mian = parseInt(i/50);
+            // 面上哪一行
+            // (i - mian*50)是每个面上图片的索引值
+            var hang = parseInt((i - mian*50)/10);
+            // 列
+            var lie = i % 10;
+            $(".unit div").eq(i).css("transform","rotateY(-20deg) translateZ("+mian*-100+"px) translateY("+(-120+hang*250)+"px) translateX("+lie*150+"px)") ;
+        }
+    }
+    // 旋转
+    var d = 0;
+    setInterval(function(){
+        d++;
+        $(".unit").css("transform","scale(0.5) rotateY("+d+"deg)");
+    },10);
+    createBox();
+
+    $(".btn1").click(setBall);
+    $(".btn2").click(setScrew);
+    $(".btn3").click(setrectangle);
+</script>
+
+

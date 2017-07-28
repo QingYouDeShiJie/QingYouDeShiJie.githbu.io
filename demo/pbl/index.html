@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{ margin: 0; padding: 0; }
+        body{ background:#eee; }
+        .waterfall{ width: 790px; margin:0 auto; position: relative; }
+        .grid{ width: 250px; box-shadow:0px 1px 3px #000; background:#fff; position: absolute; }
+        .grid img{ width: 250px; }
+        .grid h3{ padding:10px; }
+        .grid .g_detail{ padding:10px; }
+        .grid .g_author{ padding:10px; text-align: right; }
+    </style>
+</head>
+<body>
+    <div class="waterfall">
+        <div class="grid">
+            <p>
+                <img src="images/0.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/1.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/2.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/3.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/4.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/5.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/6.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/7.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/8.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/9.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+        <div class="grid">
+            <p>
+                <img src="images/10.png" alt="" />
+            </p>
+            <h3>
+                图片的标题
+            </h3>
+            <p class="g_detail">
+                图片的简介
+            </p>
+            <p class="g_author">
+                作者的姓名
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript">
+    window.onload = function(){
+        // 存储列的总高度的数组
+        var colsHeight = [0,0,0];
+        $(".grid").each(function(){
+            // 最小值的是那一列
+            var min = _.min(colsHeight);
+            // 计算小格格要在那一列
+            var colNumber = _.indexOf(colsHeight,min);
+            // 计算它自己的样式
+            $(this).css({
+                "left":colNumber * 270,
+                "top":colsHeight[colNumber]
+            });
+            // 把自己的高度加到数组中去
+            colsHeight[colNumber] += $(this).height()+20;
+        })
+    }
+</script>
